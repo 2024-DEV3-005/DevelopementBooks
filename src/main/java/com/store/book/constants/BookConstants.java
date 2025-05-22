@@ -26,6 +26,10 @@ public static final int THREE_BOOKS = 3;
 
 public static final int FOUR_BOOKS = 4;
 
-public static final int FIFTEEN_PERCENTAGE_OFFER = 15;
+public static final int FIFTEEN_PERCENTAGE_OFFER = 20;
+
+public static final int FIVE_BOOKS = 5;
+
+public static final int TWENTY_PERCENTAGE_OFFER = 25;
 
 }

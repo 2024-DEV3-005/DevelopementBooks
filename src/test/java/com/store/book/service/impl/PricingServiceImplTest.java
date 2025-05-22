@@ -1,11 +1,14 @@
 package com.store.book.service.impl;
 
+import static com.store.book.constants.BookTestConstants.OFFER_PERCENTAGE_FOR_FIVE_BOOKS;
 import static com.store.book.constants.BookTestConstants.OFFER_PERCENTAGE_FOR_FOUR_BOOKS;
 import static com.store.book.constants.BookTestConstants.OFFER_PERCENTAGE_FOR_THREE_BOOKS;
 import static com.store.book.constants.BookTestConstants.OFFER_PERCENTAGE_FOR_TWO_BOOKS;
+import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_FIVE_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_FOUR_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_THREE_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS;
+import static com.store.book.constants.BookTestConstants.PRICE_FOR_FIVE_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_FOUR_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_THE_BOOK;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_THREE_BOOKS;
@@ -79,6 +82,19 @@ class PricingServiceImplTest {
 			assertEquals(new BigDecimal(PRICE_FOR_FOUR_BOOKS), billedAmount.getTotalPrice());
 			assertEquals(OFFER_PERCENTAGE_FOR_FOUR_BOOKS, billedAmount.getDiscountPercentage());
 			assertEquals(new BigDecimal(PRICE_AFTER_DISCOUNT_FOR_FOUR_BOOKS), billedAmount.getPriceAfterDiscount());
+		});
+	}
+
+	@Test
+	void shouldReturnTwentyPercentageDiscountForFiveDifferentBooks() {
+		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE,
+				Book.TEST_DRIVEN_DEVELOPMENT, Book.LEGACY_CODE));
+		Amount billedAmount = pricingService.getPrice(basket);
+
+		assertAll(() -> {
+			assertEquals(new BigDecimal(PRICE_FOR_FIVE_BOOKS), billedAmount.getTotalPrice());
+			assertEquals(OFFER_PERCENTAGE_FOR_FIVE_BOOKS, billedAmount.getDiscountPercentage());
+			assertEquals(new BigDecimal(PRICE_AFTER_DISCOUNT_FOR_FIVE_BOOKS), billedAmount.getPriceAfterDiscount());
 		});
 	}
 

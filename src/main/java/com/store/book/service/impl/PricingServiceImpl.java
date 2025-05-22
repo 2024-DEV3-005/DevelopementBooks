@@ -1,12 +1,14 @@
 package com.store.book.service.impl;
 
 import static com.store.book.constants.BookConstants.FIFTEEN_PERCENTAGE_OFFER;
+import static com.store.book.constants.BookConstants.FIVE_BOOKS;
 import static com.store.book.constants.BookConstants.FIVE_PERCENTAGE_OFFER;
 import static com.store.book.constants.BookConstants.FOUR_BOOKS;
 import static com.store.book.constants.BookConstants.NO_DISCOUNT;
 import static com.store.book.constants.BookConstants.PERCENTAGE_DIVISOR;
 import static com.store.book.constants.BookConstants.TEN_PERCENTAGE_OFFER;
 import static com.store.book.constants.BookConstants.THREE_BOOKS;
+import static com.store.book.constants.BookConstants.TWENTY_PERCENTAGE_OFFER;
 import static com.store.book.constants.BookConstants.TWO_BOOKS;
 
 import java.math.BigDecimal;
@@ -35,6 +37,9 @@ public class PricingServiceImpl implements PricingService {
 		} else if (basket.getDistinctBooks().size() == FOUR_BOOKS) {
 			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, FIFTEEN_PERCENTAGE_OFFER);
 			return new Amount(orderTotal, discountedPrice, FIFTEEN_PERCENTAGE_OFFER);
+		} else if (basket.getDistinctBooks().size() == FIVE_BOOKS) {
+			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, TWENTY_PERCENTAGE_OFFER);
+			return new Amount(orderTotal, discountedPrice, TWENTY_PERCENTAGE_OFFER);
 		}
 
 		else {

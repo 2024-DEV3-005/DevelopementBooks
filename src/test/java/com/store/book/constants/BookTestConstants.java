@@ -44,7 +44,13 @@ public class BookTestConstants {
 	
 	public static final int PRICE_FOR_FOUR_BOOKS = 200;
 	
-    public static final String PRICE_AFTER_DISCOUNT_FOR_FOUR_BOOKS = "170.00";
+    public static final String PRICE_AFTER_DISCOUNT_FOR_FOUR_BOOKS = "160.0";
 	
-	public static final int OFFER_PERCENTAGE_FOR_FOUR_BOOKS = 15;
+	public static final int OFFER_PERCENTAGE_FOR_FOUR_BOOKS = 20;
+	
+	public static final int PRICE_FOR_FIVE_BOOKS = 250;
+	
+    public static final String PRICE_AFTER_DISCOUNT_FOR_FIVE_BOOKS = "187.50";
+	
+	public static final int OFFER_PERCENTAGE_FOR_FIVE_BOOKS = 25;
 }
