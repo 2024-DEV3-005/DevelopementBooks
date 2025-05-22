@@ -30,8 +30,6 @@ import com.store.book.service.model.Book;
 @AutoConfigureMockMvc
 class BookStoreControllerTest {
 
-
-
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -63,12 +61,11 @@ class BookStoreControllerTest {
 		mockMvc.perform(post(PRICE_API).content(BASKET_WITH_ONE_BOOK).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk());
 	}
-	
-	 @Test
-	    void shouldGet404ErrorWhenBookNotPresentWithGivenSerialNumber() throws Exception {
-		 mockMvc.perform(post(PRICE_API).content(UNDEFINED_SERIAL_NUMBER_OF_BOOK)
-	                                               .contentType(MediaType.APPLICATION_JSON_VALUE))
-	           .andExpect(status().isNotFound())
-	           .andExpect(content().string(NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER));
-	    }
+
+	@Test
+	void shouldGet404ErrorWhenBookNotPresentWithGivenSerialNumber() throws Exception {
+		mockMvc.perform(
+				post(PRICE_API).content(UNDEFINED_SERIAL_NUMBER_OF_BOOK).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isNotFound()).andExpect(content().string(NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER));
+	}
 }

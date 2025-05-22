@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 
 import org.springframework.stereotype.Service;
 
+import com.store.book.request.model.ShoppingBasket;
 import com.store.book.service.PricingService;
 import com.store.book.service.model.Book;
 
@@ -11,7 +12,14 @@ import com.store.book.service.model.Book;
 public class PricingServiceImpl implements PricingService {
 
 	@Override
-	public BigDecimal getPrice(String serialNumber) {
-		return Book.fetchBySerialNo(serialNumber).getPrice();
+	public BigDecimal getPrice(ShoppingBasket basket) {
+		return getTotalPrice(basket);
 	}
+	
+	
+	
+	private BigDecimal getTotalPrice(ShoppingBasket basket) {
+        return basket.getSerialNumberOfBook().stream().map(slNo->Book.fetchBySerialNo(slNo).getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
+
+    }
 }

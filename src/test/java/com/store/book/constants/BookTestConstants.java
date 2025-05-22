@@ -18,10 +18,14 @@ public class BookTestConstants {
 	
 	public static final String PRICE_API = "/store/calculatePrice";
 	
-	public static final String BASKET_WITH_ONE_BOOK = "{\"serialNumberOfBook\": 1 }";
+	public static final String BASKET_WITH_ONE_BOOK = "{\"serialNumberOfBook\": [1] }";
 	
 	public static final String NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER = "{\"message\":\"There is no book present with Serial number: [55]\"}";
 
-	public static final String UNDEFINED_SERIAL_NUMBER_OF_BOOK = "{\"serialNumberOfBook\": 55 }";
+	public static final String UNDEFINED_SERIAL_NUMBER_OF_BOOK = "{\"serialNumberOfBook\": [55] }";
+	
+	public static final int PRICE_FOR_TWO_BOOKS = 100;
+	
+	public static final String SERIAL_NO_FOR_SECOND_BOOK = "2";
 
 }
