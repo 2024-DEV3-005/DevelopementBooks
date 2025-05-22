@@ -61,4 +61,7 @@ public class BookTestConstants {
 	public static final String SELECTED_BOOK_WITH_ZERO_QUANTITY = "{\"selectedBooks\":[{ \"serialNumber\": \"1\",\"quantity\":0}]}";
 
 	public static final String ORDER_QUANTITY_MISSING_ERROR = "{\"message\":\"Order quantity is Missing in the request! Add Missing details and request again\"}";
+	
+	public static final String PRICE_AFTER_DISCOUNT_FOR_TWO_ELIGIBLE_AND_ONE_NORMAL_BOOK = "145.00";
+
 }

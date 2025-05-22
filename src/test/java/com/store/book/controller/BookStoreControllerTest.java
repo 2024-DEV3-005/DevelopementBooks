@@ -33,6 +33,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.store.book.mapper.ResponseObjectMapper;
 import com.store.book.service.impl.BookStoreServiceImpl;
 import com.store.book.service.model.Book;
+import com.store.book.service.model.BookQuanityDetail;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -102,4 +103,5 @@ class BookStoreControllerTest {
 				post(PRICE_API).content(SELECTED_BOOK_WITH_ZERO_QUANTITY).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andExpect(content().string(ORDER_QUANTITY_MISSING_ERROR));
 	}
+	
 }

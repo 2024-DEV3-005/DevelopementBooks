@@ -8,6 +8,7 @@ import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FO
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_FOUR_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_THREE_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS;
+import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_TWO_ELIGIBLE_AND_ONE_NORMAL_BOOK;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_FIVE_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_FOUR_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_THE_BOOK;
@@ -113,6 +114,22 @@ class PricingServiceImplTest {
 			assertEquals(new BigDecimal(PRICE_FOR_FIVE_BOOKS), billedAmount.getTotalPrice());
 			assertEquals(OFFER_PERCENTAGE_FOR_FIVE_BOOKS, billedAmount.getDiscountPercentage());
 			assertEquals(new BigDecimal(PRICE_AFTER_DISCOUNT_FOR_FIVE_BOOKS), billedAmount.getPriceAfterDiscount());
+		});
+	}
+
+	@Test
+	void calculateFivePercentageDiscountForTwoDifferentBooksAndNoDiscountForOneSameBook() {
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 2);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo));
+		Amount billedAmount = pricingService.getPrice(basket);
+
+		assertAll(() -> {
+			assertEquals(new BigDecimal(PRICE_FOR_THREE_BOOKS), billedAmount.getTotalPrice());
+			assertEquals(OFFER_PERCENTAGE_FOR_TWO_BOOKS, billedAmount.getDiscountPercentage());
+			assertEquals(new BigDecimal(PRICE_AFTER_DISCOUNT_FOR_TWO_ELIGIBLE_AND_ONE_NORMAL_BOOK),
+					billedAmount.getPriceAfterDiscount());
 		});
 	}
 
