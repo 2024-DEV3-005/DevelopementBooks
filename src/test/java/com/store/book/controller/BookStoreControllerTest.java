@@ -1,5 +1,7 @@
 package com.store.book.controller;
 
+import static com.store.book.constants.BookTestConstants.BOOK_INFO_TO_MATCH;
+import static com.store.book.constants.BookTestConstants.GET_BOOK_API;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -23,8 +25,6 @@ import com.store.book.service.model.Book;
 @AutoConfigureMockMvc
 class BookStoreControllerTest {
 
-	public static final String BOOK_INFO_TO_MATCH = "[{\"serialNumber\":\"1\",\"title\":\"Clean Code\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2008\",\"price\":\"50\"},{\"serialNumber\":\"2\",\"title\":\"The Clean Coder\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2011\",\"price\":\"50\"},{\"serialNumber\":\"3\",\"title\":\"Clean Architecture\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2017\",\"price\":\"50\"},{\"serialNumber\":\"4\",\"title\":\"Test Driven Development by Example\",\"authorName\":\"Kent Beck\",\"yearOfPublish\":\"2003\",\"price\":\"50\"},{\"serialNumber\":\"5\",\"title\":\"Working Effectively With Legacy Code\",\"authorName\":\"Michael C. Feathers\",\"yearOfPublish\":\"2004\",\"price\":\"50\"}]";
-
 	@Autowired
 	private MockMvc mockMvc;
 
@@ -37,7 +37,7 @@ class BookStoreControllerTest {
 	@Test
 	void shouldGet200ResponseForBookApi() throws Exception {
 
-		mockMvc.perform(get("/store/books").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
+		mockMvc.perform(get(GET_BOOK_API).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk());
 	}
 
 	@Test
@@ -46,7 +46,7 @@ class BookStoreControllerTest {
 
 		Mockito.when(bookStoreService.getAvailableBooks()).thenReturn(mockBooks);
 
-		mockMvc.perform(get("/store/books").accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
+		mockMvc.perform(get(GET_BOOK_API).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(BOOK_INFO_TO_MATCH));
 	}
 }

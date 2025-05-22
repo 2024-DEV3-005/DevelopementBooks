@@ -1,5 +1,7 @@
 package com.store.book.service.impl;
 
+import static com.store.book.constants.BookTestConstants.PRICE_FOR_THE_BOOK;
+import static com.store.book.constants.BookTestConstants.SERIAL_NO_FOR_FIRST_BOOK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.math.BigDecimal;
@@ -14,9 +16,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 @ExtendWith(SpringExtension.class)
 class PricingServiceImplTest {
 
-	private static final int PRICE_FOR_THE_BOOK = 50;
-	private static final String SERIAL_NO_FOR_FIRST_BOOK = "1";
-	
 	@Autowired
 	PricingServiceImpl pricingService;
 
