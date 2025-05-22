@@ -1,8 +1,11 @@
 package com.store.book.controller;
 
+import static com.store.book.constants.BookTestConstants.BASKET_WITH_ONE_BOOK;
 import static com.store.book.constants.BookTestConstants.BOOK_INFO_TO_MATCH;
 import static com.store.book.constants.BookTestConstants.GET_BOOK_API;
+import static com.store.book.constants.BookTestConstants.PRICE_API;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
@@ -48,5 +51,12 @@ class BookStoreControllerTest {
 
 		mockMvc.perform(get(GET_BOOK_API).accept(MediaType.APPLICATION_JSON)).andExpect(status().isOk())
 				.andExpect(content().json(BOOK_INFO_TO_MATCH));
+	}
+
+	@Test
+	void shouldGet200ResponseForCalculatePriceApi() throws Exception {
+
+		mockMvc.perform(post(PRICE_API).content(BASKET_WITH_ONE_BOOK).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk());
 	}
 }

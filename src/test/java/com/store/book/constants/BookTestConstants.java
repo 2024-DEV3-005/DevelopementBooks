@@ -15,5 +15,9 @@ public class BookTestConstants {
 	public static final String SHOULD_NOT_BE_EMPTY = "Book list should not be empty";
 	
 	public static final String GET_BOOK_API = "/store/books";
+	
+	public static final String PRICE_API = "/store/calculatePrice";
+	
+	public static final String BASKET_WITH_ONE_BOOK = "{\"serialNumberOfBook\": 1 }";
 
 }
