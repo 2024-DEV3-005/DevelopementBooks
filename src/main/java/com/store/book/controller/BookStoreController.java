@@ -17,7 +17,7 @@ import com.store.book.request.model.BookInfo;
 import com.store.book.request.model.ShoppingBasket;
 import com.store.book.service.BookStoreService;
 import com.store.book.service.PricingService;
-import com.store.book.service.model.Amount;
+import com.store.book.service.model.OrderSummary;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -53,7 +53,7 @@ public class BookStoreController {
 			@ApiResponse(responseCode = "200", description = "Successfully fetched the Price for the book"),
 			@ApiResponse(responseCode = "404", description = "Resource Not Found") })
 	@PostMapping(value = "calculatePrice", produces = "application/json")
-	public ResponseEntity<Amount> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
-		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getPrice(mapper.toBasket(basket)));
+	public ResponseEntity<OrderSummary> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
+		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getOrderSummary(mapper.toBasket(basket)));
 	}
 }

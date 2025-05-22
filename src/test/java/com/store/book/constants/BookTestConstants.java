@@ -1,5 +1,9 @@
 package com.store.book.constants;
 
+import lombok.AccessLevel;
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class BookTestConstants {
 
 	public static final String BOOK_INFO_TO_MATCH = "[{\"serialNumber\":\"1\",\"title\":\"Clean Code\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2008\",\"price\":\"50\"},{\"serialNumber\":\"2\",\"title\":\"The Clean Coder\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2011\",\"price\":\"50\"},{\"serialNumber\":\"3\",\"title\":\"Clean Architecture\",\"authorName\":\"Robert Martin\",\"yearOfPublish\":\"2017\",\"price\":\"50\"},{\"serialNumber\":\"4\",\"title\":\"Test Driven Development by Example\",\"authorName\":\"Kent Beck\",\"yearOfPublish\":\"2003\",\"price\":\"50\"},{\"serialNumber\":\"5\",\"title\":\"Working Effectively With Legacy Code\",\"authorName\":\"Michael C. Feathers\",\"yearOfPublish\":\"2004\",\"price\":\"50\"}]";
@@ -61,7 +65,19 @@ public class BookTestConstants {
 	public static final String SELECTED_BOOK_WITH_ZERO_QUANTITY = "{\"selectedBooks\":[{ \"serialNumber\": \"1\",\"quantity\":0}]}";
 
 	public static final String ORDER_QUANTITY_MISSING_ERROR = "{\"message\":\"Order quantity is Missing in the request! Add Missing details and request again\"}";
-	
+
 	public static final String PRICE_AFTER_DISCOUNT_FOR_TWO_ELIGIBLE_AND_ONE_NORMAL_BOOK = "145.00";
+	
+	public static final int FIRST_SET = 0;
+	
+	public static final int  SECOND_SET = 1;
+	
+	public static final int PRICE_FOR_ONE_BOOK = 50;
+	
+	public static final int SET_OF_TWO_BOOKS = 2;
+	
+	public static final Integer OFFER_PERCENTAGE_FOR_ONE_BOOK = 0;
+	
+	public static final int ONE_BOOK_IN_A_SET = 1;
 
 }

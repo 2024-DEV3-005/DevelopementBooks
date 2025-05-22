@@ -1,10 +1,10 @@
 package com.store.book.service;
 
-import com.store.book.service.model.Amount;
 import com.store.book.service.model.Basket;
+import com.store.book.service.model.OrderSummary;
 
 public interface PricingService {
 
-	Amount getPrice(Basket basket);
+	OrderSummary getOrderSummary(Basket basket);
 
 }
