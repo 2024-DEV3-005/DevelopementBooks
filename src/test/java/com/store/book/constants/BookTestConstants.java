@@ -31,4 +31,8 @@ public class BookTestConstants {
 	public static final String EMPTY_SHOPPING_BASKET_ERROR = "{\"message\":\"Shopping basket is empty. Please add books to proceed.\"}";
 
 	public static final String EMPTY_BASKET_REQUEST = "{}";
+	
+	public static final String DUPLICATE_SERIAL_NUMBERS = "{\"serialNumberOfBook\": [4,4] }";
+	
+	public static final String DUPLICATE_QUERY_FOR_SAME_BOOK_ERROR = "{\"message\":\"Duplicate Serial number [4] found in the order! Please Remove or Update Quantity\"}";
 }
