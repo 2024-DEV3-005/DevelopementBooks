@@ -27,5 +27,8 @@ public class BookTestConstants {
 	public static final String PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS = "95.00";
 	
 	public static final int OFFER_PERCENTAGE_FOR_TWO_BOOKS = 5;
+	
+	public static final String EMPTY_SHOPPING_BASKET_ERROR = "{\"message\":\"Shopping basket is empty. Please add books to proceed.\"}";
 
+	public static final String EMPTY_BASKET_REQUEST = "{}";
 }

@@ -14,5 +14,7 @@ public static final int FIVE_PERCENTAGE_OFFER = 5;
 
 public static final int TWO_BOOKS = 2;
 
+public static final String EMPTY_BASKET_PLEASE_ADD_BOOKS_TO_PROCEED = "Shopping basket is empty. Please add books to proceed.";
+
 
 }

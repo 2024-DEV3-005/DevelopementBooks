@@ -21,4 +21,11 @@ public class GlobalExceptionHandler {
 		return new ResponseEntity<>(exceptionResponse, HttpStatus.NOT_FOUND);
 	}
 
+    @ExceptionHandler(MissingItemsInBasketException.class)
+    public final ResponseEntity<ExceptionResponse> handleBadRequestException(Exception exception) {
+
+        ExceptionResponse exceptionResponse = new ExceptionResponse(exception.getMessage());
+
+        return new ResponseEntity<>(exceptionResponse, HttpStatus.BAD_REQUEST);
+    }
 }
