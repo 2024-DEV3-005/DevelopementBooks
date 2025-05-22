@@ -38,4 +38,8 @@ public static final String ORDER_QUANTITY_MISSING_MESSAGE = "Order quantity is M
 
 public static final int ZERO_QUANTITY = 0;
 
+public static final int MINIMUM_QUANTITY = 1;
+
+public static final String DELIMITER = ",";
+
 }
