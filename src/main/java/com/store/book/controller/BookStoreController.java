@@ -54,6 +54,6 @@ public class BookStoreController {
 			@ApiResponse(responseCode = "404", description = "Resource Not Found") })
 	@PostMapping(value = "calculatePrice", produces = "application/json")
 	public ResponseEntity<Amount> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
-		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getPrice(basket));
+		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getPrice(mapper.toBasket(basket)));
 	}
 }

@@ -4,8 +4,6 @@ import static com.store.book.constants.BookTestConstants.OFFER_PERCENTAGE_FOR_TW
 import static com.store.book.constants.BookTestConstants.PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_THE_BOOK;
 import static com.store.book.constants.BookTestConstants.PRICE_FOR_TWO_BOOKS;
-import static com.store.book.constants.BookTestConstants.SERIAL_NO_FOR_FIRST_BOOK;
-import static com.store.book.constants.BookTestConstants.SERIAL_NO_FOR_SECOND_BOOK;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
@@ -18,8 +16,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-import com.store.book.request.model.ShoppingBasket;
 import com.store.book.service.model.Amount;
+import com.store.book.service.model.Basket;
+import com.store.book.service.model.Book;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -30,23 +29,19 @@ class PricingServiceImplTest {
 
 	@Test
 	void shouldReturnThePriceOfTheBookWithGivenSerialNumber() {
-		ShoppingBasket basket = new ShoppingBasket();
-		basket.setSerialNumberOfBook(List.of(SERIAL_NO_FOR_FIRST_BOOK));
+		Basket basket = new Basket(List.of(Book.CLEAN_CODE));
 		assertEquals(new BigDecimal(PRICE_FOR_THE_BOOK), pricingService.getPrice(basket).getTotalPrice());
 	}
 
 	@Test
 	void shouldReturnTheTotalPriceforMultipleBooks() {
-		ShoppingBasket basket = new ShoppingBasket();
-		basket.setSerialNumberOfBook(List.of(SERIAL_NO_FOR_FIRST_BOOK, SERIAL_NO_FOR_SECOND_BOOK));
+		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
 		assertEquals(new BigDecimal(PRICE_FOR_TWO_BOOKS), pricingService.getPrice(basket).getTotalPrice());
 	}
 
 	@Test
 	void shouldReturnFivePercentageDiscountForTwoDifferentBooks() {
-		ShoppingBasket basket = new ShoppingBasket();
-		basket.setSerialNumberOfBook(List.of(SERIAL_NO_FOR_FIRST_BOOK, SERIAL_NO_FOR_SECOND_BOOK));
-
+		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
 		Amount billedAmount = pricingService.getPrice(basket);
 
 		assertAll(() -> {

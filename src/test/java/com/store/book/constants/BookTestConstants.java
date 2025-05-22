@@ -6,8 +6,6 @@ public class BookTestConstants {
 
 	public static final int PRICE_FOR_THE_BOOK = 50;
 
-	public static final String SERIAL_NO_FOR_FIRST_BOOK = "1";
-
 	public static final String SHOULD_MATCH_ENUM_VALUES = "Returned books should match enum values";
 	
 	public static final String SHOULD_RETURN_ALL_BOOKS = "Should return all available books";
@@ -25,8 +23,6 @@ public class BookTestConstants {
 	public static final String UNDEFINED_SERIAL_NUMBER_OF_BOOK = "{\"serialNumberOfBook\": [55] }";
 	
 	public static final int PRICE_FOR_TWO_BOOKS = 100;
-	
-	public static final String SERIAL_NO_FOR_SECOND_BOOK = "2";
 	
 	public static final String PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS = "95.00";
 	
