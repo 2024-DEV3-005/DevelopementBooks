@@ -1,11 +1,10 @@
 package com.store.book.service;
 
-import java.math.BigDecimal;
-
 import com.store.book.request.model.ShoppingBasket;
+import com.store.book.service.model.Amount;
 
 public interface PricingService {
-	
-	BigDecimal getPrice (ShoppingBasket basket);
+
+	Amount getPrice(ShoppingBasket basket);
 
 }

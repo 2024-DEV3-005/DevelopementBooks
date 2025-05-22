@@ -27,5 +27,9 @@ public class BookTestConstants {
 	public static final int PRICE_FOR_TWO_BOOKS = 100;
 	
 	public static final String SERIAL_NO_FOR_SECOND_BOOK = "2";
+	
+	public static final String PRICE_AFTER_DISCOUNT_FOR_TWO_BOOKS = "95.00";
+	
+	public static final int OFFER_PERCENTAGE_FOR_TWO_BOOKS = 5;
 
 }
