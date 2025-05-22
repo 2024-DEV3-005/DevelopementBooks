@@ -1,6 +1,9 @@
 package com.store.book.service.model;
 
 import java.math.BigDecimal;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -20,4 +23,11 @@ public enum Book {
 	final String authorName;
 	final String yearOfPublish;
 	final BigDecimal price;
+
+	private static final Map<String, Book> bookMap = Stream.of(Book.values())
+			.collect(Collectors.toUnmodifiableMap(Book::getSerialNumber, book -> book));
+
+	public static Book fetchBySerialNo(String serialNumber) {
+		return bookMap.get(serialNumber);
+	}
 }
