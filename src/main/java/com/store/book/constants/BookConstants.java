@@ -24,5 +24,8 @@ public static final int NO_DISCOUNT = 5;
 
 public static final int THREE_BOOKS = 3;
 
+public static final int FOUR_BOOKS = 4;
+
+public static final int FIFTEEN_PERCENTAGE_OFFER = 15;
 
 }
