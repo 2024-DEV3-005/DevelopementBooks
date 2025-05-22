@@ -2,6 +2,7 @@ package com.store.book.validators;
 
 import static com.store.book.constants.BookConstants.DUPLICATE_BOOK_MESSAGE;
 import static com.store.book.constants.BookConstants.EMPTY_BASKET_PLEASE_ADD_BOOKS_TO_PROCEED;
+import static com.store.book.constants.BookConstants.*;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -11,6 +12,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.util.CollectionUtils;
 
 import com.store.book.exception.DuplicateBookEntryException;
+import com.store.book.exception.InCompleteDataException;
 import com.store.book.exception.MissingItemsInBasketException;
 import com.store.book.request.model.SelectedBook;
 import com.store.book.request.model.ShoppingBasket;
@@ -24,6 +26,7 @@ public final class ShoppingBasketValidator {
 	public static void validateShoppingBasket(ShoppingBasket shoppingBasket) {
 		validateBasketNotEmpty(shoppingBasket);
 		checkForDuplicateSerialNos(shoppingBasket);
+		checkMandatorySerialNumberInSelectedBooks(shoppingBasket);
 	}
 
 	private static void validateBasketNotEmpty(ShoppingBasket shoppingBasket) {
@@ -44,6 +47,14 @@ public final class ShoppingBasketValidator {
 		return shoppingBasket.getSelectedBooks().stream().map(SelectedBook::getSerialNumber)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).entrySet().stream()
 				.filter(entry -> entry.getValue() > 1).map(Map.Entry::getKey).collect(Collectors.joining(","));
+	}
+
+	private static void checkMandatorySerialNumberInSelectedBooks(ShoppingBasket shoppingBasket) {
+		for (SelectedBook bookSelected : shoppingBasket.getSelectedBooks()) {
+			if (StringUtils.isBlank(bookSelected.getSerialNumber())) {
+				throw new InCompleteDataException(SERIAL_NUMBER_MISSING_MESSAGE);
+			}
+		}
 	}
 
 }

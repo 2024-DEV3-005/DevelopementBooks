@@ -53,4 +53,8 @@ public class BookTestConstants {
 	public static final String PRICE_AFTER_DISCOUNT_FOR_FIVE_BOOKS = "187.50";
 
 	public static final int OFFER_PERCENTAGE_FOR_FIVE_BOOKS = 25;
+	
+	public static final String SELECTED_BOOK_WITH_OUT_SL_NO = "{\"selectedBooks\":[{ \"serialNumber\": \"\",\"quantity\":1}]}";
+	
+	public static final String SERIAL_NUMBER_MISSING_ERROR = "{\"message\":\"SerialNumber Missing in the request! Add Missing details and request again\"}";
 }

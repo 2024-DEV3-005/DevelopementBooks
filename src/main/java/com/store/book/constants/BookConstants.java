@@ -32,4 +32,6 @@ public static final int FIVE_BOOKS = 5;
 
 public static final int TWENTY_PERCENTAGE_OFFER = 25;
 
+public static final String SERIAL_NUMBER_MISSING_MESSAGE = "SerialNumber Missing in the request! Add Missing details and request again";
+
 }
