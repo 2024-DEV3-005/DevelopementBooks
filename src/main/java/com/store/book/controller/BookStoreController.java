@@ -50,7 +50,8 @@ public class BookStoreController {
 
 	@Operation(summary = "Fetch the price for books ", description = "Fetch the best price for the developement books ")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Successfully fetched the Price for the book") })
+			@ApiResponse(responseCode = "200", description = "Successfully fetched the Price for the book"),
+			@ApiResponse(responseCode = "404", description = "Resource Not Found") })
 	@PostMapping(value = "calculatePrice", produces = "application/json")
 	public ResponseEntity<BigDecimal> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
 		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getPrice(basket.getSerialNumberOfBook()));

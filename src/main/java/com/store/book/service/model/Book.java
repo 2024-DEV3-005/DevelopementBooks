@@ -1,9 +1,14 @@
 package com.store.book.service.model;
 
+import static com.store.book.constants.BookConstants.BOOK_NOT_PRESENT_TO_PROCESS;
+
 import java.math.BigDecimal;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
+
+import com.store.book.exception.BookNotFoundException;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -28,6 +33,7 @@ public enum Book {
 			.collect(Collectors.toUnmodifiableMap(Book::getSerialNumber, book -> book));
 
 	public static Book fetchBySerialNo(String serialNumber) {
-		return bookMap.get(serialNumber);
+		return Optional.ofNullable(bookMap.get(serialNumber))
+				.orElseThrow(() -> new BookNotFoundException(String.format(BOOK_NOT_PRESENT_TO_PROCESS, serialNumber)));
 	}
 }

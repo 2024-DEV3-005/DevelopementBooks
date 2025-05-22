@@ -3,7 +3,9 @@ package com.store.book.controller;
 import static com.store.book.constants.BookTestConstants.BASKET_WITH_ONE_BOOK;
 import static com.store.book.constants.BookTestConstants.BOOK_INFO_TO_MATCH;
 import static com.store.book.constants.BookTestConstants.GET_BOOK_API;
+import static com.store.book.constants.BookTestConstants.NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER;
 import static com.store.book.constants.BookTestConstants.PRICE_API;
+import static com.store.book.constants.BookTestConstants.UNDEFINED_SERIAL_NUMBER_OF_BOOK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
@@ -27,6 +29,8 @@ import com.store.book.service.model.Book;
 @SpringBootTest
 @AutoConfigureMockMvc
 class BookStoreControllerTest {
+
+
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -59,4 +63,12 @@ class BookStoreControllerTest {
 		mockMvc.perform(post(PRICE_API).content(BASKET_WITH_ONE_BOOK).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isOk());
 	}
+	
+	 @Test
+	    void shouldGet404ErrorWhenBookNotPresentWithGivenSerialNumber() throws Exception {
+		 mockMvc.perform(post(PRICE_API).content(UNDEFINED_SERIAL_NUMBER_OF_BOOK)
+	                                               .contentType(MediaType.APPLICATION_JSON_VALUE))
+	           .andExpect(status().isNotFound())
+	           .andExpect(content().string(NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER));
+	    }
 }
