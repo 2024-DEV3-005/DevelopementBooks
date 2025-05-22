@@ -12,6 +12,7 @@ import org.springframework.util.CollectionUtils;
 
 import com.store.book.exception.DuplicateBookEntryException;
 import com.store.book.exception.MissingItemsInBasketException;
+import com.store.book.request.model.SelectedBook;
 import com.store.book.request.model.ShoppingBasket;
 
 import lombok.AccessLevel;
@@ -26,7 +27,7 @@ public final class ShoppingBasketValidator {
 	}
 
 	private static void validateBasketNotEmpty(ShoppingBasket shoppingBasket) {
-		if (null == shoppingBasket || CollectionUtils.isEmpty(shoppingBasket.getSerialNumberOfBook())) {
+		if (null == shoppingBasket || CollectionUtils.isEmpty(shoppingBasket.getSelectedBooks())) {
 			throw new MissingItemsInBasketException(EMPTY_BASKET_PLEASE_ADD_BOOKS_TO_PROCEED);
 		}
 	}
@@ -40,7 +41,7 @@ public final class ShoppingBasketValidator {
 	}
 
 	private static String findDuplicateSerialNos(ShoppingBasket shoppingBasket) {
-		return shoppingBasket.getSerialNumberOfBook().stream()
+		return shoppingBasket.getSelectedBooks().stream().map(SelectedBook::getSerialNumber)
 				.collect(Collectors.groupingBy(Function.identity(), Collectors.counting())).entrySet().stream()
 				.filter(entry -> entry.getValue() > 1).map(Map.Entry::getKey).collect(Collectors.joining(","));
 	}

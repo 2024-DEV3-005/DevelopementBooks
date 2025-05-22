@@ -28,6 +28,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import com.store.book.service.model.Amount;
 import com.store.book.service.model.Basket;
 import com.store.book.service.model.Book;
+import com.store.book.service.model.BookQuanityDetail;
 
 @SpringBootTest
 @ExtendWith(SpringExtension.class)
@@ -38,19 +39,23 @@ class PricingServiceImplTest {
 
 	@Test
 	void shouldReturnThePriceOfTheBookWithGivenSerialNumber() {
-		Basket basket = new Basket(List.of(Book.CLEAN_CODE));
+		Basket basket = new Basket(List.of(new BookQuanityDetail(Book.CLEAN_CODE, 1)));
 		assertEquals(new BigDecimal(PRICE_FOR_THE_BOOK), pricingService.getPrice(basket).getTotalPrice());
 	}
 
 	@Test
 	void shouldReturnTheTotalPriceforMultipleBooks() {
-		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 1);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo));
 		assertEquals(new BigDecimal(PRICE_FOR_TWO_BOOKS), pricingService.getPrice(basket).getTotalPrice());
 	}
 
 	@Test
 	void shouldReturnFivePercentageDiscountForTwoDifferentBooks() {
-		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER));
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 1);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo));
 		Amount billedAmount = pricingService.getPrice(basket);
 
 		assertAll(() -> {
@@ -62,7 +67,11 @@ class PricingServiceImplTest {
 
 	@Test
 	void shouldReturnTenPercentageDiscountForThreeDifferentBooks() {
-		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE));
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 1);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+		BookQuanityDetail forBookThree = new BookQuanityDetail(Book.CLEAN_ARCHITECTURE, 1);
+
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo, forBookThree));
 		Amount billedAmount = pricingService.getPrice(basket);
 
 		assertAll(() -> {
@@ -74,8 +83,12 @@ class PricingServiceImplTest {
 
 	@Test
 	void shouldReturnFifteenPercentageDiscountForFourDifferentBooks() {
-		Basket basket = new Basket(
-				List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE, Book.TEST_DRIVEN_DEVELOPMENT));
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 1);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+		BookQuanityDetail forBookThree = new BookQuanityDetail(Book.CLEAN_ARCHITECTURE, 1);
+		BookQuanityDetail forBookFour = new BookQuanityDetail(Book.TEST_DRIVEN_DEVELOPMENT, 1);
+
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo, forBookThree, forBookFour));
 		Amount billedAmount = pricingService.getPrice(basket);
 
 		assertAll(() -> {
@@ -87,8 +100,13 @@ class PricingServiceImplTest {
 
 	@Test
 	void shouldReturnTwentyPercentageDiscountForFiveDifferentBooks() {
-		Basket basket = new Basket(List.of(Book.CLEAN_CODE, Book.CLEAN_CODER, Book.CLEAN_ARCHITECTURE,
-				Book.TEST_DRIVEN_DEVELOPMENT, Book.LEGACY_CODE));
+		BookQuanityDetail forBookOne = new BookQuanityDetail(Book.CLEAN_CODE, 1);
+		BookQuanityDetail forBookTwo = new BookQuanityDetail(Book.CLEAN_CODER, 1);
+		BookQuanityDetail forBookThree = new BookQuanityDetail(Book.CLEAN_ARCHITECTURE, 1);
+		BookQuanityDetail forBookFour = new BookQuanityDetail(Book.TEST_DRIVEN_DEVELOPMENT, 1);
+		BookQuanityDetail forBookFive = new BookQuanityDetail(Book.LEGACY_CODE, 1);
+
+		Basket basket = new Basket(List.of(forBookOne, forBookTwo, forBookThree, forBookFour, forBookFive));
 		Amount billedAmount = pricingService.getPrice(basket);
 
 		assertAll(() -> {

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.store.book.service.PricingService;
 import com.store.book.service.model.Amount;
 import com.store.book.service.model.Basket;
-import com.store.book.service.model.Book;
 import com.store.book.service.model.Discount;
 
 @Service("pricingService")
@@ -20,13 +19,13 @@ public class PricingServiceImpl implements PricingService {
 
 		BigDecimal orderTotal = getTotalPrice(basket);
 
-		Integer discount = Discount.findDiscountByNumberOfBooks(basket.getDistinctBooks().size());
+		Integer discount = Discount.findDiscountByNumberOfBooks(basket.getBooksToOrder().size());
 		BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, discount);
 		return new Amount(orderTotal, discountedPrice, discount);
 	}
 
 	private BigDecimal getTotalPrice(Basket basket) {
-		return basket.getDistinctBooks().stream().map(Book::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
+		return basket.getBooksToOrder().stream().map(books->books.getBook().getPrice()).reduce(BigDecimal.ZERO, BigDecimal::add);
 
 	}
 

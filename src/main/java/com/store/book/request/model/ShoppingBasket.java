@@ -9,5 +9,5 @@ import lombok.Setter;
 @Setter
 public class ShoppingBasket {
 
-	private List<String> serialNumberOfBook;
+	private List<SelectedBook> selectedBooks;
 }

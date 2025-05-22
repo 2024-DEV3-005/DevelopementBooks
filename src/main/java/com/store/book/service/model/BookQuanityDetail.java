@@ -1,14 +1,13 @@
 package com.store.book.service.model;
 
-import java.util.List;
-
 import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 @AllArgsConstructor
-public class Basket {
-
-	List<BookQuanityDetail> booksToOrder;
-
+@Setter
+public class BookQuanityDetail  {
+    Book book;
+    Integer quantity;
 }
