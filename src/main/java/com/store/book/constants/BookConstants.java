@@ -34,4 +34,8 @@ public static final int TWENTY_PERCENTAGE_OFFER = 25;
 
 public static final String SERIAL_NUMBER_MISSING_MESSAGE = "SerialNumber Missing in the request! Add Missing details and request again";
 
+public static final String ORDER_QUANTITY_MISSING_MESSAGE = "Order quantity is Missing in the request! Add Missing details and request again";
+
+public static final int ZERO_QUANTITY = 0;
+
 }

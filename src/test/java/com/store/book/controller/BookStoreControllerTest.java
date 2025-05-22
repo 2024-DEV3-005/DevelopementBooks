@@ -8,8 +8,10 @@ import static com.store.book.constants.BookTestConstants.EMPTY_BASKET_REQUEST;
 import static com.store.book.constants.BookTestConstants.EMPTY_SHOPPING_BASKET_ERROR;
 import static com.store.book.constants.BookTestConstants.GET_BOOK_API;
 import static com.store.book.constants.BookTestConstants.NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER;
+import static com.store.book.constants.BookTestConstants.ORDER_QUANTITY_MISSING_ERROR;
 import static com.store.book.constants.BookTestConstants.PRICE_API;
 import static com.store.book.constants.BookTestConstants.SELECTED_BOOK_WITH_OUT_SL_NO;
+import static com.store.book.constants.BookTestConstants.SELECTED_BOOK_WITH_ZERO_QUANTITY;
 import static com.store.book.constants.BookTestConstants.SERIAL_NUMBER_MISSING_ERROR;
 import static com.store.book.constants.BookTestConstants.UNDEFINED_SERIAL_NUMBER_OF_BOOK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
@@ -92,5 +94,12 @@ class BookStoreControllerTest {
 		mockMvc.perform(
 				post(PRICE_API).content(SELECTED_BOOK_WITH_OUT_SL_NO).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andExpect(content().string(SERIAL_NUMBER_MISSING_ERROR));
+	}
+
+	@Test
+	void shouldGet400ResponseWhenQuanityOfBooksIsNotPresent() throws Exception {
+		mockMvc.perform(
+				post(PRICE_API).content(SELECTED_BOOK_WITH_ZERO_QUANTITY).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isBadRequest()).andExpect(content().string(ORDER_QUANTITY_MISSING_ERROR));
 	}
 }

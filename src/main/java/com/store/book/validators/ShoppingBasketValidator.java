@@ -2,7 +2,9 @@ package com.store.book.validators;
 
 import static com.store.book.constants.BookConstants.DUPLICATE_BOOK_MESSAGE;
 import static com.store.book.constants.BookConstants.EMPTY_BASKET_PLEASE_ADD_BOOKS_TO_PROCEED;
-import static com.store.book.constants.BookConstants.*;
+import static com.store.book.constants.BookConstants.ORDER_QUANTITY_MISSING_MESSAGE;
+import static com.store.book.constants.BookConstants.SERIAL_NUMBER_MISSING_MESSAGE;
+import static com.store.book.constants.BookConstants.ZERO_QUANTITY;
 
 import java.util.Map;
 import java.util.function.Function;
@@ -27,6 +29,7 @@ public final class ShoppingBasketValidator {
 		validateBasketNotEmpty(shoppingBasket);
 		checkForDuplicateSerialNos(shoppingBasket);
 		checkMandatorySerialNumberInSelectedBooks(shoppingBasket);
+		checkMandatoryQuantityInSelectedBooks(shoppingBasket);
 	}
 
 	private static void validateBasketNotEmpty(ShoppingBasket shoppingBasket) {
@@ -53,6 +56,14 @@ public final class ShoppingBasketValidator {
 		for (SelectedBook bookSelected : shoppingBasket.getSelectedBooks()) {
 			if (StringUtils.isBlank(bookSelected.getSerialNumber())) {
 				throw new InCompleteDataException(SERIAL_NUMBER_MISSING_MESSAGE);
+			}
+		}
+	}
+
+	private static void checkMandatoryQuantityInSelectedBooks(ShoppingBasket shoppingBasket) {
+		for (SelectedBook bookSelected : shoppingBasket.getSelectedBooks()) {
+			if (null == bookSelected.getQuantity() || ZERO_QUANTITY == bookSelected.getQuantity()) {
+				throw new InCompleteDataException(ORDER_QUANTITY_MISSING_MESSAGE);
 			}
 		}
 	}
