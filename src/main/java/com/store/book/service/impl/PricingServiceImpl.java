@@ -1,15 +1,6 @@
 package com.store.book.service.impl;
 
-import static com.store.book.constants.BookConstants.FIFTEEN_PERCENTAGE_OFFER;
-import static com.store.book.constants.BookConstants.FIVE_BOOKS;
-import static com.store.book.constants.BookConstants.FIVE_PERCENTAGE_OFFER;
-import static com.store.book.constants.BookConstants.FOUR_BOOKS;
-import static com.store.book.constants.BookConstants.NO_DISCOUNT;
 import static com.store.book.constants.BookConstants.PERCENTAGE_DIVISOR;
-import static com.store.book.constants.BookConstants.TEN_PERCENTAGE_OFFER;
-import static com.store.book.constants.BookConstants.THREE_BOOKS;
-import static com.store.book.constants.BookConstants.TWENTY_PERCENTAGE_OFFER;
-import static com.store.book.constants.BookConstants.TWO_BOOKS;
 
 import java.math.BigDecimal;
 
@@ -19,6 +10,7 @@ import com.store.book.service.PricingService;
 import com.store.book.service.model.Amount;
 import com.store.book.service.model.Basket;
 import com.store.book.service.model.Book;
+import com.store.book.service.model.Discount;
 
 @Service("pricingService")
 public class PricingServiceImpl implements PricingService {
@@ -28,23 +20,9 @@ public class PricingServiceImpl implements PricingService {
 
 		BigDecimal orderTotal = getTotalPrice(basket);
 
-		if (basket.getDistinctBooks().size() == TWO_BOOKS) {
-			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, FIVE_PERCENTAGE_OFFER);
-			return new Amount(orderTotal, discountedPrice, FIVE_PERCENTAGE_OFFER);
-		} else if (basket.getDistinctBooks().size() == THREE_BOOKS) {
-			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, TEN_PERCENTAGE_OFFER);
-			return new Amount(orderTotal, discountedPrice, TEN_PERCENTAGE_OFFER);
-		} else if (basket.getDistinctBooks().size() == FOUR_BOOKS) {
-			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, FIFTEEN_PERCENTAGE_OFFER);
-			return new Amount(orderTotal, discountedPrice, FIFTEEN_PERCENTAGE_OFFER);
-		} else if (basket.getDistinctBooks().size() == FIVE_BOOKS) {
-			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, TWENTY_PERCENTAGE_OFFER);
-			return new Amount(orderTotal, discountedPrice, TWENTY_PERCENTAGE_OFFER);
-		}
-
-		else {
-			return new Amount(orderTotal, orderTotal, NO_DISCOUNT);
-		}
+		Integer discount = Discount.findDiscountByNumberOfBooks(basket.getDistinctBooks().size());
+		BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, discount);
+		return new Amount(orderTotal, discountedPrice, discount);
 	}
 
 	private BigDecimal getTotalPrice(Basket basket) {
