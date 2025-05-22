@@ -18,5 +18,11 @@ public static final String EMPTY_BASKET_PLEASE_ADD_BOOKS_TO_PROCEED = "Shopping 
 
 public static final String DUPLICATE_BOOK_MESSAGE = "Duplicate Serial number [%s] found in the order! Please Remove or Update Quantity";
 
+public static final int TEN_PERCENTAGE_OFFER = 10;
+
+public static final int NO_DISCOUNT = 5;
+
+public static final int THREE_BOOKS = 3;
+
 
 }

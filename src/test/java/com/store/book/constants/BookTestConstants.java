@@ -35,4 +35,11 @@ public class BookTestConstants {
 	public static final String DUPLICATE_SERIAL_NUMBERS = "{\"serialNumberOfBook\": [4,4] }";
 	
 	public static final String DUPLICATE_QUERY_FOR_SAME_BOOK_ERROR = "{\"message\":\"Duplicate Serial number [4] found in the order! Please Remove or Update Quantity\"}";
+	
+	public static final int PRICE_FOR_THREE_BOOKS = 150;
+	
+    public static final String PRICE_AFTER_DISCOUNT_FOR_THREE_BOOKS = "135.0";
+	
+	public static final int OFFER_PERCENTAGE_FOR_THREE_BOOKS = 10;
+	
 }

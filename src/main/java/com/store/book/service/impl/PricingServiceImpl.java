@@ -1,7 +1,10 @@
 package com.store.book.service.impl;
 
 import static com.store.book.constants.BookConstants.FIVE_PERCENTAGE_OFFER;
+import static com.store.book.constants.BookConstants.NO_DISCOUNT;
 import static com.store.book.constants.BookConstants.PERCENTAGE_DIVISOR;
+import static com.store.book.constants.BookConstants.TEN_PERCENTAGE_OFFER;
+import static com.store.book.constants.BookConstants.THREE_BOOKS;
 import static com.store.book.constants.BookConstants.TWO_BOOKS;
 
 import java.math.BigDecimal;
@@ -23,15 +26,19 @@ public class PricingServiceImpl implements PricingService {
 
 		if (basket.getDistinctBooks().size() == TWO_BOOKS) {
 			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, FIVE_PERCENTAGE_OFFER);
-			return new Amount(orderTotal, discountedPrice, 5);
-		} else {
-			return new Amount(orderTotal, orderTotal, 0);
+			return new Amount(orderTotal, discountedPrice, FIVE_PERCENTAGE_OFFER);
+		} else if (basket.getDistinctBooks().size() == THREE_BOOKS) {
+			BigDecimal discountedPrice = computePriceAfterDiscount(orderTotal, TEN_PERCENTAGE_OFFER);
+			return new Amount(orderTotal, discountedPrice, TEN_PERCENTAGE_OFFER);
+		}
+
+		else {
+			return new Amount(orderTotal, orderTotal, NO_DISCOUNT);
 		}
 	}
 
 	private BigDecimal getTotalPrice(Basket basket) {
-		return basket.getDistinctBooks().stream().map(Book::getPrice)
-				.reduce(BigDecimal.ZERO, BigDecimal::add);
+		return basket.getDistinctBooks().stream().map(Book::getPrice).reduce(BigDecimal.ZERO, BigDecimal::add);
 
 	}
 
