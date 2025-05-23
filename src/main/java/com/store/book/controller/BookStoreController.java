@@ -13,11 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.store.book.mapper.ResponseObjectMapper;
-import com.store.book.request.model.BookInfo;
 import com.store.book.request.model.ShoppingBasket;
+import com.store.book.response.model.OrderSummaryResponse;
 import com.store.book.service.BookStoreService;
 import com.store.book.service.PricingService;
-import com.store.book.service.model.OrderSummary;
+import com.store.book.service.model.Book;
 
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -42,9 +42,9 @@ public class BookStoreController {
 	@Operation(summary = "Retrieve the list of books from the store", description = "This endpoint returns the current BookStore configuration including the list of books.")
 	@ApiResponses(value = @ApiResponse(responseCode = "200", description = "Successfully retrieved the book list"))
 	@GetMapping(value = "books", produces = "application/json")
-	public ResponseEntity<List<BookInfo>> getAllBooks() {
+	public ResponseEntity<List<Book>> getAllBooks() {
 
-		return ResponseEntity.status(HttpStatus.OK).body(mapper.toBookInfoResponse(service.getAvailableBooks()));
+		return ResponseEntity.status(HttpStatus.OK).body(service.getAvailableBooks());
 
 	}
 
@@ -53,7 +53,8 @@ public class BookStoreController {
 			@ApiResponse(responseCode = "200", description = "Successfully fetched the Price for the book"),
 			@ApiResponse(responseCode = "404", description = "Resource Not Found") })
 	@PostMapping(value = "calculatePrice", produces = "application/json")
-	public ResponseEntity<OrderSummary> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
-		return ResponseEntity.status(HttpStatus.OK).body(pricingService.getOrderSummary(mapper.toBasket(basket)));
+	public ResponseEntity<OrderSummaryResponse> fetchCalculatePrice(@RequestBody ShoppingBasket basket) {
+		return ResponseEntity.status(HttpStatus.OK)
+				.body(mapper.toOrderSummaryResponse(pricingService.getOrderSummary(mapper.toBasket(basket))));
 	}
 }

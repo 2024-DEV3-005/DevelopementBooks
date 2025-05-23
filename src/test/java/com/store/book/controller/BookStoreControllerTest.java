@@ -9,10 +9,12 @@ import static com.store.book.constants.BookTestConstants.EMPTY_SHOPPING_BASKET_E
 import static com.store.book.constants.BookTestConstants.GET_BOOK_API;
 import static com.store.book.constants.BookTestConstants.NO_BOOK_PRESENT_WITH_GIVEN_SERIAL_NUMBER;
 import static com.store.book.constants.BookTestConstants.ORDER_QUANTITY_MISSING_ERROR;
+import static com.store.book.constants.BookTestConstants.ORDER_SUMMARY_FOR_TWO_QUANTITY_OF_SAME_BOOK;
 import static com.store.book.constants.BookTestConstants.PRICE_API;
 import static com.store.book.constants.BookTestConstants.SELECTED_BOOK_WITH_OUT_SL_NO;
 import static com.store.book.constants.BookTestConstants.SELECTED_BOOK_WITH_ZERO_QUANTITY;
 import static com.store.book.constants.BookTestConstants.SERIAL_NUMBER_MISSING_ERROR;
+import static com.store.book.constants.BookTestConstants.TWO_QUANTITY_OF_SAME_BOOK;
 import static com.store.book.constants.BookTestConstants.UNDEFINED_SERIAL_NUMBER_OF_BOOK;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
@@ -33,7 +35,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import com.store.book.mapper.ResponseObjectMapper;
 import com.store.book.service.impl.BookStoreServiceImpl;
 import com.store.book.service.model.Book;
-import com.store.book.service.model.BookQuanityDetail;
 
 @SpringBootTest
 @AutoConfigureMockMvc
@@ -103,5 +104,12 @@ class BookStoreControllerTest {
 				post(PRICE_API).content(SELECTED_BOOK_WITH_ZERO_QUANTITY).contentType(MediaType.APPLICATION_JSON_VALUE))
 				.andExpect(status().isBadRequest()).andExpect(content().string(ORDER_QUANTITY_MISSING_ERROR));
 	}
-	
+
+	@Test
+	void shouldGetOrderSummaryResponseForTwoQtyOfSameBook() throws Exception {
+		mockMvc.perform(
+				post(PRICE_API).content(TWO_QUANTITY_OF_SAME_BOOK).contentType(MediaType.APPLICATION_JSON_VALUE))
+				.andExpect(status().isOk()).andExpect(content().string(ORDER_SUMMARY_FOR_TWO_QUANTITY_OF_SAME_BOOK));
+	}
+
 }

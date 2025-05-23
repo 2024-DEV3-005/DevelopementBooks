@@ -8,9 +8,11 @@ import org.mapstruct.Mapper;
 import com.store.book.request.model.BookInfo;
 import com.store.book.request.model.SelectedBook;
 import com.store.book.request.model.ShoppingBasket;
+import com.store.book.response.model.OrderSummaryResponse;
 import com.store.book.service.model.Basket;
 import com.store.book.service.model.Book;
 import com.store.book.service.model.BookQuanityDetail;
+import com.store.book.service.model.OrderSummary;
 import com.store.book.validators.ShoppingBasketValidator;
 
 @Mapper(componentModel = "spring")
@@ -29,4 +31,5 @@ public interface ResponseObjectMapper {
 		return new Basket(booksToOrder);
 	}
 
+	OrderSummaryResponse toOrderSummaryResponse(OrderSummary source);
 }

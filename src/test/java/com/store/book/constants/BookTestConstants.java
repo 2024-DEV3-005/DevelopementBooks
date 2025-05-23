@@ -79,5 +79,10 @@ public class BookTestConstants {
 	public static final Integer OFFER_PERCENTAGE_FOR_ONE_BOOK = 0;
 	
 	public static final int ONE_BOOK_IN_A_SET = 1;
+	
+	public static final String TWO_QUANTITY_OF_SAME_BOOK = "{\"selectedBooks\":[{ \"serialNumber\": \"3\",\"quantity\":2}]}";
+	
+	public static final String ORDER_SUMMARY_FOR_TWO_QUANTITY_OF_SAME_BOOK = "{\"bookToOrderList\":[{\"books\":[\"CLEAN_ARCHITECTURE\"],\"discountPercentage\":0,\"orderTotal\":50,\"amountAfterDiscount\":50},{\"books\":[\"CLEAN_ARCHITECTURE\"],\"discountPercentage\":0,\"orderTotal\":50,\"amountAfterDiscount\":50}],\"totalPrice\":\"100\",\"finalPriceAfterDiscount\":\"100\"}";
+
 
 }
